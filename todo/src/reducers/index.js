@@ -4,7 +4,7 @@ const initialState = {
   tasks: [
     {
       id: 12,
-      text: 'Walk the dog.',
+      text: 'Walk Redux',
       completed: false,
     },
   ]
