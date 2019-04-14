@@ -1,23 +1,37 @@
 import { ADD_TODO, TOGGLE_TODO } from '../actions';
 
 const initialState = {
-  id: Date.now(),
-  text: 'Walk the dog.',
-  completed: false,
+  tasks: [
+    {
+      id: 12,
+      text: 'Walk the dog.',
+      completed: false,
+    },
+  ]
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
+      const newTodo = {
+        id: Date.now(),
+        text: action.payload,
+        completed: false,
+      };
       return {
         ...state,
-        text: action.payload,
+        tasks: [...state.tasks, newTodo]
       };
     case TOGGLE_TODO:
+      console.log('From Reducer Toggle');
+      const selectedTask = state.tasks.find(task => task.id === action.payload);
+      const updatedTask = {
+        ...selectedTask,
+        completed: !selectedTask.completed,
+      };
       return {
         ...state,
-        id: action.payload,
-        completed: true,
+        tasks: [...state.tasks, updatedTask],
       };
     default:
       return state;

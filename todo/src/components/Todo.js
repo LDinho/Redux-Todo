@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Todo = () => {
+const Todo = ({ task }) => {
 
   return (
     <div className="item-wrapper">
       <p>
-        One itemTodo
+        {task.text}
       </p>
     </div>
   )
