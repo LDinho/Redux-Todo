@@ -24,14 +24,16 @@ export default (state = initialState, action) => {
       };
     case TOGGLE_TODO:
       console.log('From Reducer Toggle');
-      const selectedTask = state.tasks.find(task => task.id === action.payload);
-      const updatedTask = {
-        ...selectedTask,
-        completed: !selectedTask.completed,
-      };
+      const updatedTasks = state.tasks.map((task) => {
+        if (task.id === action.payload) {
+          task.completed = !task.completed;
+        }
+        return task;
+      });
+
       return {
         ...state,
-        tasks: [...state.tasks, updatedTask],
+        tasks: updatedTasks,
       };
     default:
       return state;

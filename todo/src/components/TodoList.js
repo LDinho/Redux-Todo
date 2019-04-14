@@ -1,19 +1,21 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import Todo from './Todo';
 
 class TodoList extends React.Component {
 
   render() {
+    const { tasks, onTaskClickHandler } = this.props;
+
     return (
       <div className="main-container">
-        {this.props.tasks.map((task) => {
+        {tasks.map((task) => {
           console.log('FROM TodoList:', task.text);
           const {id} = task;
 
           return <Todo key={id}
                        task={task}
+                       onTaskClickHandler={onTaskClickHandler}
 
           />
         })}
@@ -22,15 +24,4 @@ class TodoList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tasks: state.tasks,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  {
-
-  }
-)(TodoList);
+export default TodoList;

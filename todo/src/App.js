@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import './App.css';
+import { toggle_todo } from './actions';
 import TodoList from './components/TodoList'
 
 class App extends Component {
+
+  handleClickToggle = (id) => {
+    this.props.toggle_todo(id);
+  }
+
   render() {
+    const {tasks} = this.props;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -12,10 +22,23 @@ class App extends Component {
             </h1>
         </header>
 
-        <TodoList />
+        <TodoList tasks={tasks}
+                  onTaskClickHandler={this.handleClickToggle}
+        />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { toggle_todo,
+
+  }
+)(App);
